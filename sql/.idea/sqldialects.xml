@@ -3,6 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/02_home_management.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/09_sample_data.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/../../下载代码/ruoyi (引言管理)/introductionMenu.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/../../下载代码/ruoyi（友情链接）/linkMenu.sql" dialect="MySQL" />
     <file url="PROJECT" dialect="MySQL" />
   </component>

@@ -28,7 +28,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2025-06-03
  */
 @RestController
-@RequestMapping("/home/link")
+@RequestMapping("/home/footer/link")
 public class FriendlyLinkController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class FriendlyLinkController extends BaseController
     /**
      * 查询友情链接，管理页脚友情链接列表
      */
-    @PreAuthorize("@ss.hasPermi('home:link:list')")
+    @PreAuthorize("@ss.hasPermi('home:footer:link:list')")
     @GetMapping("/list")
     public TableDataInfo list(FriendlyLink friendlyLink)
     {
@@ -49,7 +49,7 @@ public class FriendlyLinkController extends BaseController
     /**
      * 导出友情链接，管理页脚友情链接列表
      */
-    @PreAuthorize("@ss.hasPermi('home:link:export')")
+    @PreAuthorize("@ss.hasPermi('home:footer:link:export')")
     @Log(title = "友情链接，管理页脚友情链接", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FriendlyLink friendlyLink)
@@ -62,7 +62,7 @@ public class FriendlyLinkController extends BaseController
     /**
      * 获取友情链接，管理页脚友情链接详细信息
      */
-    @PreAuthorize("@ss.hasPermi('home:link:query')")
+    @PreAuthorize("@ss.hasPermi('home:footer:link:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class FriendlyLinkController extends BaseController
     /**
      * 新增友情链接，管理页脚友情链接
      */
-    @PreAuthorize("@ss.hasPermi('home:link:add')")
+    @PreAuthorize("@ss.hasPermi('home:footer:link:add')")
     @Log(title = "友情链接，管理页脚友情链接", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FriendlyLink friendlyLink)
@@ -83,7 +83,7 @@ public class FriendlyLinkController extends BaseController
     /**
      * 修改友情链接，管理页脚友情链接
      */
-    @PreAuthorize("@ss.hasPermi('home:link:edit')")
+    @PreAuthorize("@ss.hasPermi('home:footer:link:edit')")
     @Log(title = "友情链接，管理页脚友情链接", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FriendlyLink friendlyLink)
@@ -94,7 +94,7 @@ public class FriendlyLinkController extends BaseController
     /**
      * 删除友情链接，管理页脚友情链接
      */
-    @PreAuthorize("@ss.hasPermi('home:link:remove')")
+    @PreAuthorize("@ss.hasPermi('home:footer:link:remove')")
     @Log(title = "友情链接，管理页脚友情链接", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
