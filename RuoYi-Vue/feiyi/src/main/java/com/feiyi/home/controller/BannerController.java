@@ -1,6 +1,8 @@
 package com.feiyi.home.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.Anonymous;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2025-06-02
  */
 @RestController
-@RequestMapping("/banner/banner")
+@RequestMapping("/home/banner")
 public class BannerController extends BaseController
 {
     @Autowired
@@ -37,8 +39,9 @@ public class BannerController extends BaseController
     /**
      * 查询Banner图片管理列表
      */
-    @PreAuthorize("@ss.hasPermi('banner:banner:list')")
+    // @PreAuthorize("@ss.hasPermi('home:banner:list')")
     @GetMapping("/list")
+    @Anonymous
     public TableDataInfo list(Banner banner)
     {
         startPage();
@@ -49,7 +52,7 @@ public class BannerController extends BaseController
     /**
      * 导出Banner图片管理列表
      */
-    @PreAuthorize("@ss.hasPermi('banner:banner:export')")
+    @PreAuthorize("@ss.hasPermi('home:banner:export')")
     @Log(title = "Banner图片管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Banner banner)
@@ -62,7 +65,7 @@ public class BannerController extends BaseController
     /**
      * 获取Banner图片管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('banner:banner:query')")
+    @PreAuthorize("@ss.hasPermi('home:banner:query')")
     @GetMapping(value = "/{bannerId}")
     public AjaxResult getInfo(@PathVariable("bannerId") Long bannerId)
     {
@@ -72,7 +75,7 @@ public class BannerController extends BaseController
     /**
      * 新增Banner图片管理
      */
-    @PreAuthorize("@ss.hasPermi('banner:banner:add')")
+    @PreAuthorize("@ss.hasPermi('home:banner:add')")
     @Log(title = "Banner图片管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Banner banner)
@@ -83,7 +86,7 @@ public class BannerController extends BaseController
     /**
      * 修改Banner图片管理
      */
-    @PreAuthorize("@ss.hasPermi('banner:banner:edit')")
+    @PreAuthorize("@ss.hasPermi('home:banner:edit')")
     @Log(title = "Banner图片管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Banner banner)
@@ -94,7 +97,7 @@ public class BannerController extends BaseController
     /**
      * 删除Banner图片管理
      */
-    @PreAuthorize("@ss.hasPermi('banner:banner:remove')")
+    @PreAuthorize("@ss.hasPermi('home:banner:remove')")
     @Log(title = "Banner图片管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{bannerIds}")
     public AjaxResult remove(@PathVariable Long[] bannerIds)

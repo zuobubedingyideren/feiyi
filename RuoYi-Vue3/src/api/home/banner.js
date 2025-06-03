@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询Banner图片管理列表
 export function listBanner(query) {
   return request({
-    url: '/banner/banner/list',
+    url: '/home/banner/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listBanner(query) {
 // 查询Banner图片管理详细
 export function getBanner(bannerId) {
   return request({
-    url: '/banner/banner/' + bannerId,
+    url: '/home/banner/' + bannerId,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getBanner(bannerId) {
 // 新增Banner图片管理
 export function addBanner(data) {
   return request({
-    url: '/banner/banner',
+    url: '/home/banner',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addBanner(data) {
 // 修改Banner图片管理
 export function updateBanner(data) {
   return request({
-    url: '/banner/banner',
+    url: '/home/banner',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateBanner(data) {
 // 删除Banner图片管理
 export function delBanner(bannerId) {
   return request({
-    url: '/banner/banner/' + bannerId,
+    url: '/home/banner/' + bannerId,
     method: 'delete'
   })
 }

@@ -30,7 +30,7 @@
           plain
           icon="Plus"
           @click="handleAdd"
-          v-hasPermi="['home:tech-support:add']"
+          v-hasPermi="['home:techSupport:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -40,7 +40,7 @@
           icon="Edit"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['home:tech-support:edit']"
+          v-hasPermi="['home:techSupport:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -50,7 +50,7 @@
           icon="Delete"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['home:tech-support:remove']"
+          v-hasPermi="['home:techSupport:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -59,13 +59,13 @@
           plain
           icon="Download"
           @click="handleExport"
-          v-hasPermi="['home:tech-support:export']"
+          v-hasPermi="['home:techSupport:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="tech-supportList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="techSupportList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="页脚" align="center" prop="footerId" />
       <el-table-column label="标题" align="center" prop="title" />
@@ -80,8 +80,8 @@
       <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['home:tech-support:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['home:tech-support:remove']">删除</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['home:techSupport:edit']">修改</el-button>
+          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['home:techSupport:remove']">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -96,7 +96,7 @@
 
     <!-- 添加或修改技术支持对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="tech-supportRef" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="techSupportRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入标题" />
         </el-form-item>
@@ -123,8 +123,8 @@
   </div>
 </template>
 
-<script setup name="Tech-support">
-import { listTechSupport, getTechSupport, delTechSupport, addTechSupport, updateTechSupport } from "@/api/home/tech-support"
+<script setup name="TechSupport">
+import { listTechSupport, getTechSupport, delTechSupport, addTechSupport, updateTechSupport } from "@/api/home/techSupport"
 
 const { proxy } = getCurrentInstance()
 
@@ -173,7 +173,7 @@ const { queryParams, form, rules } = toRefs(data)
 /** 查询技术支持列表 */
 function getList() {
   loading.value = true
-  listTech-support(queryParams.value).then(response => {
+  listTechSupport(queryParams.value).then(response => {
     techSupportList.value = response.rows
     total.value = response.total
     loading.value = false
@@ -201,7 +201,7 @@ function reset() {
     remark: null,
     delFlag: null
   }
-  proxy.resetForm("tech-supportRef")
+  proxy.resetForm("techSupportRef")
 }
 
 /** 搜索按钮操作 */
@@ -234,7 +234,7 @@ function handleAdd() {
 function handleUpdate(row) {
   reset()
   const _footerId = row.footerId || ids.value
-  getTech-support(_footerId).then(response => {
+  getTechSupport(_footerId).then(response => {
     form.value = response.data
     open.value = true
     title.value = "修改技术支持"
@@ -243,16 +243,16 @@ function handleUpdate(row) {
 
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs["tech-supportRef"].validate(valid => {
+  proxy.$refs["techSupportRef"].validate(valid => {
     if (valid) {
       if (form.value.footerId != null) {
-        updateTech-support(form.value).then(response => {
+        updateTechSupport(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功")
           open.value = false
           getList()
         })
       } else {
-        addTech-support(form.value).then(response => {
+        addTechSupport(form.value).then(response => {
           proxy.$modal.msgSuccess("新增成功")
           open.value = false
           getList()
@@ -266,7 +266,7 @@ function submitForm() {
 function handleDelete(row) {
   const _footerIds = row.footerId || ids.value
   proxy.$modal.confirm('是否确认删除技术支持编号为"' + _footerIds + '"的数据项？').then(function() {
-    return delTech-support(_footerIds)
+    return delTechSupport(_footerIds)
   }).then(() => {
     getList()
     proxy.$modal.msgSuccess("删除成功")
@@ -275,9 +275,9 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('home/tech-support/export', {
+  proxy.download('home/techSupport/export', {
     ...queryParams.value
-  }, `tech-support_${new Date().getTime()}.xlsx`)
+  }, `techSupport_${new Date().getTime()}.xlsx`)
 }
 
 getList()

@@ -1,0 +1,116 @@
+-- 学术管理模块：文章、访谈、课程等
+USE heritage_management;
+
+-- 学术文章表：管理学术研究类文章信息
+CREATE TABLE article (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '文章唯一标识，自增主键',
+    title VARCHAR(200) NOT NULL COMMENT '文章标题',
+    author VARCHAR(100) COMMENT '作者',
+    publish_date DATE COMMENT '发表日期',
+    source VARCHAR(100) COMMENT '文章来源',
+    content TEXT NOT NULL COMMENT '文章内容',
+    category TINYINT COMMENT '文章类别',
+    featured TINYINT DEFAULT 0 COMMENT '是否推荐：1-推荐，0-不推荐',
+    view_count INT DEFAULT 0 COMMENT '浏览次数',
+    display_order INT DEFAULT 0 COMMENT '显示顺序',
+    status TINYINT DEFAULT 1 COMMENT '文章状态：1-显示，0-隐藏',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
+    updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '记录更新时间',
+    created_by BIGINT COMMENT '创建人ID',
+    updated_by BIGINT COMMENT '更新人ID',
+    del_flag TINYINT DEFAULT 0 COMMENT '逻辑删除标志：0-未删除，1-已删除',
+    deleted_at DATETIME COMMENT '删除时间',
+    deleted_by BIGINT COMMENT '删除人ID',
+    remark VARCHAR(255) COMMENT '备注',
+    INDEX idx_title (title) COMMENT '标题索引',
+    INDEX idx_author (author) COMMENT '作者索引',
+    INDEX idx_publish_date (publish_date) COMMENT '发表日期索引',
+    INDEX idx_category (category) COMMENT '类别索引',
+    INDEX idx_featured (featured) COMMENT '推荐索引',
+    INDEX idx_display_order (display_order) COMMENT '显示顺序索引',
+    INDEX idx_status (status) COMMENT '状态索引',
+    INDEX idx_del_flag (del_flag) COMMENT '删除状态索引'
+) COMMENT '学术文章表，管理学术研究类文章信息';
+
+-- 访谈表：管理学者、传承人等访谈内容
+CREATE TABLE interview (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '访谈唯一标识，自增主键',
+    title VARCHAR(200) NOT NULL COMMENT '访谈标题',
+    interviewee VARCHAR(100) COMMENT '受访者姓名',
+    avatar_url VARCHAR(255) COMMENT '受访者头像',
+    short_bio VARCHAR(300) COMMENT '受访者简介',
+    interview_date DATE COMMENT '访谈日期',
+    content TEXT NOT NULL COMMENT '访谈内容',
+    featured TINYINT DEFAULT 0 COMMENT '是否推荐：1-推荐，0-不推荐',
+    view_count INT DEFAULT 0 COMMENT '浏览次数',
+    display_order INT DEFAULT 0 COMMENT '显示顺序',
+    status TINYINT DEFAULT 1 COMMENT '访谈状态：1-显示，0-隐藏',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
+    updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '记录更新时间',
+    created_by BIGINT COMMENT '创建人ID',
+    updated_by BIGINT COMMENT '更新人ID',
+    del_flag TINYINT DEFAULT 0 COMMENT '逻辑删除标志：0-未删除，1-已删除',
+    deleted_at DATETIME COMMENT '删除时间',
+    deleted_by BIGINT COMMENT '删除人ID',
+    remark VARCHAR(255) COMMENT '备注',
+    INDEX idx_title (title) COMMENT '标题索引',
+    INDEX idx_interviewee (interviewee) COMMENT '受访者索引',
+    INDEX idx_interview_date (interview_date) COMMENT '访谈日期索引',
+    INDEX idx_featured (featured) COMMENT '推荐索引',
+    INDEX idx_display_order (display_order) COMMENT '显示顺序索引',
+    INDEX idx_status (status) COMMENT '状态索引',
+    INDEX idx_del_flag (del_flag) COMMENT '删除状态索引'
+) COMMENT '访谈表，管理学者、传承人等访谈内容';
+
+-- 课程表：管理与非遗相关的课程信息
+CREATE TABLE course (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '课程唯一标识，自增主键',
+    course_name VARCHAR(200) NOT NULL COMMENT '课程名称',
+    instructor VARCHAR(100) COMMENT '讲师姓名',
+    cover_image VARCHAR(255) COMMENT '课程封面图片',
+    description TEXT COMMENT '课程简介',
+    course_duration VARCHAR(50) COMMENT '课程时长',
+    related_project_id BIGINT COMMENT '关联非遗项目ID，外键关联heritage_project表',
+    featured TINYINT DEFAULT 0 COMMENT '是否推荐：1-推荐，0-不推荐',
+    view_count INT DEFAULT 0 COMMENT '浏览次数',
+    display_order INT DEFAULT 0 COMMENT '显示顺序',
+    status TINYINT DEFAULT 1 COMMENT '课程状态：1-显示，0-隐藏',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
+    updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '记录更新时间',
+    created_by BIGINT COMMENT '创建人ID',
+    updated_by BIGINT COMMENT '更新人ID',
+    del_flag TINYINT DEFAULT 0 COMMENT '逻辑删除标志：0-未删除，1-已删除',
+    deleted_at DATETIME COMMENT '删除时间',
+    deleted_by BIGINT COMMENT '删除人ID',
+    remark VARCHAR(255) COMMENT '备注',
+    INDEX idx_course_name (course_name) COMMENT '课程名称索引',
+    INDEX idx_instructor (instructor) COMMENT '讲师索引',
+    INDEX idx_related_project_id (related_project_id) COMMENT '关联项目ID索引',
+    INDEX idx_featured (featured) COMMENT '推荐索引',
+    INDEX idx_display_order (display_order) COMMENT '显示顺序索引',
+    INDEX idx_status (status) COMMENT '状态索引',
+    INDEX idx_del_flag (del_flag) COMMENT '删除状态索引'
+) COMMENT '课程表，管理与非遗相关的课程信息';
+
+-- 课程章节表：管理课程下的章节内容
+CREATE TABLE course_chapter (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '课程章节唯一标识，自增主键',
+    course_id BIGINT NOT NULL COMMENT '所属课程ID，外键关联course表',
+    chapter_name VARCHAR(200) NOT NULL COMMENT '章节名称',
+    content TEXT COMMENT '章节内容',
+    video_url VARCHAR(255) COMMENT '章节视频地址',
+    chapter_order INT DEFAULT 0 COMMENT '章节顺序',
+    status TINYINT DEFAULT 1 COMMENT '章节状态：1-显示，0-隐藏',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
+    updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '记录更新时间',
+    created_by BIGINT COMMENT '创建人ID',
+    updated_by BIGINT COMMENT '更新人ID',
+    del_flag TINYINT DEFAULT 0 COMMENT '逻辑删除标志：0-未删除，1-已删除',
+    deleted_at DATETIME COMMENT '删除时间',
+    deleted_by BIGINT COMMENT '删除人ID',
+    remark VARCHAR(255) COMMENT '备注',
+    INDEX idx_course_id (course_id) COMMENT '所属课程ID索引',
+    INDEX idx_chapter_order (chapter_order) COMMENT '章节顺序索引',
+    INDEX idx_status (status) COMMENT '状态索引',
+    INDEX idx_del_flag (del_flag) COMMENT '删除状态索引'
+) COMMENT '课程章节表，管理课程下的章节内容';

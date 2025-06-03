@@ -1,0 +1,793 @@
+{
+  "menuConfig": {
+    "title": "青海非物质文化遗产管理系统",
+    "version": "1.0.0",
+    "menus": [
+      {
+        "id": "home",
+        "name": "首页管理",
+        "icon": "el-icon-house",
+        "path": "/home",
+        "component": "Layout",
+        "redirect": "/home/banner",
+        "meta": {
+          "title": "首页管理",
+          "roles": ["admin", "editor"]
+        },
+        "children": [
+          {
+            "id": "banner",
+            "name": "Banner管理",
+            "icon": "el-icon-picture",
+            "path": "banner",
+            "component": "home/banner/index",
+            "meta": {
+              "title": "Banner管理",
+              "roles": ["admin", "editor"],
+              "description": "4个页面的banner管理功能，支持比例判断和数据压缩"
+            },
+            "buttons": [
+              {
+                "id": "banner:add",
+                "name": "新增Banner",
+                "permission": "home:banner:add"
+              },
+              {
+                "id": "banner:edit",
+                "name": "编辑Banner",
+                "permission": "home:banner:edit"
+              },
+              {
+                "id": "banner:delete",
+                "name": "删除Banner",
+                "permission": "home:banner:delete"
+              },
+              {
+                "id": "banner:upload",
+                "name": "上传图片",
+                "permission": "home:banner:upload"
+              },
+              {
+                "id": "banner:compress",
+                "name": "图片压缩",
+                "permission": "home:banner:compress"
+              }
+            ]
+          },
+          {
+            "id": "introduction",
+            "name": "引言管理",
+            "icon": "el-icon-document",
+            "path": "introduction",
+            "component": "home/introduction/index",
+            "meta": {
+              "title": "引言管理",
+              "roles": ["admin", "editor"]
+            },
+            "buttons": [
+              {
+                "id": "introduction:edit",
+                "name": "编辑引言",
+                "permission": "home:introduction:edit"
+              },
+              {
+                "id": "introduction:preview",
+                "name": "预览引言",
+                "permission": "home:introduction:view"
+              }
+            ]
+          },
+          {
+            "id": "world-heritage",
+            "name": "世界名录",
+            "icon": "el-icon-star-on",
+            "path": "world-heritage",
+            "component": "home/world-heritage/index",
+            "meta": {
+              "title": "世界名录",
+              "roles": ["admin", "editor"]
+            },
+            "children": [
+              {
+                "id": "featured-projects",
+                "name": "置顶项目",
+                "path": "featured",
+                "component": "home/world-heritage/featured",
+                "meta": {
+                  "title": "置顶项目",
+                  "roles": ["admin", "editor"]
+                }
+              },
+              {
+                "id": "hot-projects",
+                "name": "热门项目",
+                "path": "hot",
+                "component": "home/world-heritage/hot",
+                "meta": {
+                  "title": "热门项目",
+                  "roles": ["admin", "editor"],
+                  "description": "管理项目名称、ID、简介图片、竖版图片和蒙版效果"
+                }
+              }
+            ],
+            "buttons": [
+              {
+                "id": "world-heritage:set-featured",
+                "name": "设置置顶",
+                "permission": "home:world-heritage:featured"
+              },
+              {
+                "id": "world-heritage:set-hot",
+                "name": "设置热门",
+                "permission": "home:world-heritage:hot"
+              },
+              {
+                "id": "world-heritage:upload-image",
+                "name": "上传图片",
+                "permission": "home:world-heritage:upload"
+              }
+            ]
+          },
+          {
+            "id": "footer",
+            "name": "页脚管理",
+            "icon": "el-icon-bottom",
+            "path": "footer",
+            "component": "home/footer/index",
+            "meta": {
+              "title": "页脚管理",
+              "roles": ["admin", "editor"]
+            },
+            "children": [
+              {
+                "id": "tech-support",
+                "name": "技术支持设置",
+                "path": "tech-support",
+                "component": "home/footer/tech-support",
+                "meta": {
+                  "title": "技术支持设置",
+                  "roles": ["admin"]
+                }
+              },
+              {
+                "id": "friendly-links",
+                "name": "友情链接管理",
+                "path": "links",
+                "component": "home/footer/links",
+                "meta": {
+                  "title": "友情链接管理",
+                  "roles": ["admin", "editor"],
+                  "description": "支持1-6个友情链接"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "catalog",
+        "name": "清单管理",
+        "icon": "el-icon-menu",
+        "path": "/catalog",
+        "component": "Layout",
+        "redirect": "/catalog/unesco",
+        "meta": {
+          "title": "清单管理",
+          "roles": ["admin", "editor", "operator"]
+        },
+        "children": [
+          {
+            "id": "unesco-catalog",
+            "name": "联合国教科文组织名录",
+            "icon": "el-icon-trophy",
+            "path": "unesco",
+            "component": "catalog/unesco/index",
+            "meta": {
+              "title": "青海入选联合国教科文组织非物质文化遗产名录",
+              "roles": ["admin", "editor", "operator"]
+            },
+            "buttons": [
+              {
+                "id": "unesco:add",
+                "name": "新增项目",
+                "permission": "catalog:unesco:add"
+              },
+              {
+                "id": "unesco:edit",
+                "name": "编辑项目",
+                "permission": "catalog:unesco:edit"
+              },
+              {
+                "id": "unesco:delete",
+                "name": "删除项目",
+                "permission": "catalog:unesco:delete"
+              },
+              {
+                "id": "unesco:view",
+                "name": "查看详情",
+                "permission": "catalog:unesco:view"
+              }
+            ]
+          },
+          {
+            "id": "project-catalog",
+            "name": "项目名录",
+            "icon": "el-icon-folder-opened",
+            "path": "project",
+            "component": "catalog/project/index",
+            "meta": {
+              "title": "项目名录",
+              "roles": ["admin", "editor", "operator"]
+            },
+            "children": [
+              {
+                "id": "project-entry",
+                "name": "录入名录",
+                "path": "entry",
+                "component": "catalog/project/entry",
+                "meta": {
+                  "title": "录入名录",
+                  "roles": ["admin", "editor", "operator"],
+                  "description": "支持区级、州级、省级、国家级项目录入"
+                }
+              },
+              {
+                "id": "project-manage",
+                "name": "管理名录",
+                "path": "manage",
+                "component": "catalog/project/manage",
+                "meta": {
+                  "title": "管理名录",
+                  "roles": ["admin", "editor"]
+                }
+              },
+              {
+                "id": "project-import",
+                "name": "批量导入",
+                "path": "import",
+                "component": "catalog/project/import",
+                "meta": {
+                  "title": "批量导入",
+                  "roles": ["admin", "editor"]
+                }
+              }
+            ],
+            "buttons": [
+              {
+                "id": "project:add",
+                "name": "新增项目",
+                "permission": "catalog:project:add"
+              },
+              {
+                "id": "project:edit",
+                "name": "编辑项目",
+                "permission": "catalog:project:edit"
+              },
+              {
+                "id": "project:delete",
+                "name": "删除项目",
+                "permission": "catalog:project:delete"
+              },
+              {
+                "id": "project:import",
+                "name": "批量导入",
+                "permission": "catalog:project:import"
+              },
+              {
+                "id": "project:export",
+                "name": "导出数据",
+                "permission": "catalog:project:export"
+              }
+            ]
+          },
+          {
+            "id": "inheritor-catalog",
+            "name": "传承人名录",
+            "icon": "el-icon-user",
+            "path": "inheritor",
+            "component": "catalog/inheritor/index",
+            "meta": {
+              "title": "传承人名录",
+              "roles": ["admin", "editor", "operator"]
+            },
+            "children": [
+              {
+                "id": "inheritor-entry",
+                "name": "录入传承人",
+                "path": "entry",
+                "component": "catalog/inheritor/entry",
+                "meta": {
+                  "title": "录入传承人",
+                  "roles": ["admin", "editor", "operator"],
+                  "description": "支持区级、州级、省级、国家级传承人录入"
+                }
+              },
+              {
+                "id": "inheritor-manage",
+                "name": "管理传承人",
+                "path": "manage",
+                "component": "catalog/inheritor/manage",
+                "meta": {
+                  "title": "管理传承人",
+                  "roles": ["admin", "editor"]
+                }
+              },
+              {
+                "id": "inheritor-import",
+                "name": "批量导入",
+                "path": "import",
+                "component": "catalog/inheritor/import",
+                "meta": {
+                  "title": "批量导入",
+                  "roles": ["admin", "editor"]
+                }
+              }
+            ],
+            "buttons": [
+              {
+                "id": "inheritor:add",
+                "name": "新增传承人",
+                "permission": "catalog:inheritor:add"
+              },
+              {
+                "id": "inheritor:edit",
+                "name": "编辑传承人",
+                "permission": "catalog:inheritor:edit"
+              },
+              {
+                "id": "inheritor:delete",
+                "name": "删除传承人",
+                "permission": "catalog:inheritor:delete"
+              },
+              {
+                "id": "inheritor:import",
+                "name": "批量导入",
+                "permission": "catalog:inheritor:import"
+              },
+              {
+                "id": "inheritor:export",
+                "name": "导出数据",
+                "permission": "catalog:inheritor:export"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "resource",
+        "name": "资源管理",
+        "icon": "el-icon-folder",
+        "path": "/resource",
+        "component": "Layout",
+        "redirect": "/resource/album",
+        "meta": {
+          "title": "资源管理",
+          "roles": ["admin", "editor", "operator"]
+        },
+        "children": [
+          {
+            "id": "photo-album",
+            "name": "影集管理",
+            "icon": "el-icon-camera",
+            "path": "album",
+            "component": "resource/album/index",
+            "meta": {
+              "title": "影集管理",
+              "roles": ["admin", "editor", "operator"]
+            },
+            "children": [
+              {
+                "id": "album-create",
+                "name": "创建影集",
+                "path": "create",
+                "component": "resource/album/create",
+                "meta": {
+                  "title": "创建影集",
+                  "roles": ["admin", "editor", "operator"]
+                }
+              },
+              {
+                "id": "album-manage",
+                "name": "管理影集",
+                "path": "manage",
+                "component": "resource/album/manage",
+                "meta": {
+                  "title": "管理影集",
+                  "roles": ["admin", "editor"]
+                }
+              }
+            ],
+            "buttons": [
+              {
+                "id": "album:create",
+                "name": "创建影集",
+                "permission": "resource:album:create"
+              },
+              {
+                "id": "album:edit",
+                "name": "编辑影集",
+                "permission": "resource:album:edit"
+              },
+              {
+                "id": "album:delete",
+                "name": "删除影集",
+                "permission": "resource:album:delete"
+              },
+              {
+                "id": "album:upload",
+                "name": "上传图片",
+                "permission": "resource:album:upload"
+              },
+              {
+                "id": "album:watermark",
+                "name": "添加水印",
+                "permission": "resource:album:watermark"
+              }
+            ],
+            "fields": [
+              "影集名称",
+              "图片年份",
+              "图片作者",
+              "作者介绍",
+              "作品介绍"
+            ]
+          },
+          {
+            "id": "music",
+            "name": "音乐管理",
+            "icon": "el-icon-headset",
+            "path": "music",
+            "component": "resource/music/index",
+            "meta": {
+              "title": "音乐管理",
+              "roles": ["admin", "editor", "operator"]
+            },
+            "buttons": [
+              {
+                "id": "music:add",
+                "name": "新增音乐",
+                "permission": "resource:music:add"
+              },
+              {
+                "id": "music:edit",
+                "name": "编辑音乐",
+                "permission": "resource:music:edit"
+              },
+              {
+                "id": "music:delete",
+                "name": "删除音乐",
+                "permission": "resource:music:delete"
+              },
+              {
+                "id": "music:play",
+                "name": "播放音乐",
+                "permission": "resource:music:play"
+              }
+            ]
+          },
+          {
+            "id": "video",
+            "name": "视频管理",
+            "icon": "el-icon-video-camera",
+            "path": "video",
+            "component": "resource/video/index",
+            "meta": {
+              "title": "视频管理",
+              "roles": ["admin", "editor", "operator"]
+            },
+            "buttons": [
+              {
+                "id": "video:add",
+                "name": "新增视频",
+                "permission": "resource:video:add"
+              },
+              {
+                "id": "video:edit",
+                "name": "编辑视频",
+                "permission": "resource:video:edit"
+              },
+              {
+                "id": "video:delete",
+                "name": "删除视频",
+                "permission": "resource:video:delete"
+              },
+              {
+                "id": "video:play",
+                "name": "播放视频",
+                "permission": "resource:video:play"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "academic",
+        "name": "学术管理",
+        "icon": "el-icon-reading",
+        "path": "/academic",
+        "component": "Layout",
+        "redirect": "/academic/forum",
+        "meta": {
+          "title": "学术管理",
+          "roles": ["admin", "editor"]
+        },
+        "children": [
+          {
+            "id": "forum",
+            "name": "学术论坛",
+            "icon": "el-icon-chat-dot-round",
+            "path": "forum",
+            "component": "academic/forum/index",
+            "meta": {
+              "title": "学术论坛",
+              "roles": ["admin", "editor"]
+            },
+            "children": [
+              {
+                "id": "forum-article",
+                "name": "发布文章",
+                "path": "article",
+                "component": "academic/forum/article",
+                "meta": {
+                  "title": "发布文章",
+                  "roles": ["admin", "editor"]
+                }
+              }
+            ],
+            "buttons": [
+              {
+                "id": "forum:add",
+                "name": "新增论坛",
+                "permission": "academic:forum:add"
+              },
+              {
+                "id": "forum:edit",
+                "name": "编辑论坛",
+                "permission": "academic:forum:edit"
+              },
+              {
+                "id": "forum:delete",
+                "name": "删除论坛",
+                "permission": "academic:forum:delete"
+              },
+              {
+                "id": "forum:publish",
+                "name": "发布文章",
+                "permission": "academic:forum:publish"
+              }
+            ]
+          },
+          {
+            "id": "interview",
+            "name": "经典访谈",
+            "icon": "el-icon-microphone",
+            "path": "interview",
+            "component": "academic/interview/index",
+            "meta": {
+              "title": "经典访谈",
+              "roles": ["admin", "editor"]
+            },
+            "buttons": [
+              {
+                "id": "interview:add",
+                "name": "新增访谈",
+                "permission": "academic:interview:add"
+              },
+              {
+                "id": "interview:edit",
+                "name": "编辑访谈",
+                "permission": "academic:interview:edit"
+              },
+              {
+                "id": "interview:delete",
+                "name": "删除访谈",
+                "permission": "academic:interview:delete"
+              },
+              {
+                "id": "interview:publish",
+                "name": "发布访谈",
+                "permission": "academic:interview:publish"
+              }
+            ],
+            "fields": [
+              "标题",
+              "头像",
+              "简介（100字）"
+            ]
+          },
+          {
+            "id": "course",
+            "name": "精品课程",
+            "icon": "el-icon-notebook-2",
+            "path": "course",
+            "component": "academic/course/index",
+            "meta": {
+              "title": "精品课程",
+              "roles": ["admin", "editor"]
+            },
+            "buttons": [
+              {
+                "id": "course:add",
+                "name": "新增课程",
+                "permission": "academic:course:add"
+              },
+              {
+                "id": "course:edit",
+                "name": "编辑课程",
+                "permission": "academic:course:edit"
+              },
+              {
+                "id": "course:delete",
+                "name": "删除课程",
+                "permission": "academic:course:delete"
+              },
+              {
+                "id": "course:publish",
+                "name": "发布课程",
+                "permission": "academic:course:publish"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "system",
+        "name": "用户管理",
+        "icon": "el-icon-setting",
+        "path": "/system",
+        "component": "Layout",
+        "redirect": "/system/user",
+        "meta": {
+          "title": "用户管理",
+          "roles": ["admin"]
+        },
+        "children": [
+          {
+            "id": "user",
+            "name": "用户管理",
+            "icon": "el-icon-user-solid",
+            "path": "user",
+            "component": "system/user/index",
+            "meta": {
+              "title": "用户管理",
+              "roles": ["admin"]
+            },
+            "children": [
+              {
+                "id": "super-admin",
+                "name": "超级管理员",
+                "path": "super-admin",
+                "component": "system/user/super-admin",
+                "meta": {
+                  "title": "超级管理员",
+                  "roles": ["admin"]
+                }
+              },
+              {
+                "id": "operator",
+                "name": "录入员",
+                "path": "operator",
+                "component": "system/user/operator",
+                "meta": {
+                  "title": "录入员",
+                  "roles": ["admin"]
+                }
+              }
+            ],
+            "buttons": [
+              {
+                "id": "user:add",
+                "name": "新增用户",
+                "permission": "system:user:add"
+              },
+              {
+                "id": "user:edit",
+                "name": "编辑用户",
+                "permission": "system:user:edit"
+              },
+              {
+                "id": "user:delete",
+                "name": "删除用户",
+                "permission": "system:user:delete"
+              },
+              {
+                "id": "user:reset-password",
+                "name": "重置密码",
+                "permission": "system:user:reset"
+              }
+            ]
+          },
+          {
+            "id": "log",
+            "name": "日志管理",
+            "icon": "el-icon-document-copy",
+            "path": "log",
+            "component": "system/log/index",
+            "meta": {
+              "title": "日志管理",
+              "roles": ["admin"]
+            },
+            "children": [
+              {
+                "id": "login-log",
+                "name": "登录日志",
+                "path": "login",
+                "component": "system/log/login",
+                "meta": {
+                  "title": "查询登录日志",
+                  "roles": ["admin"]
+                }
+              },
+              {
+                "id": "operation-log",
+                "name": "操作日志",
+                "path": "operation",
+                "component": "system/log/operation",
+                "meta": {
+                  "title": "查询敏感操作日志",
+                  "roles": ["admin"]
+                }
+              }
+            ],
+            "buttons": [
+              {
+                "id": "log:view",
+                "name": "查看日志",
+                "permission": "system:log:view"
+              },
+              {
+                "id": "log:export",
+                "name": "导出日志",
+                "permission": "system:log:export"
+              },
+              {
+                "id": "log:clear",
+                "name": "清空日志",
+                "permission": "system:log:clear"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "id": "admin",
+        "name": "超级管理员",
+        "description": "拥有系统所有权限",
+        "permissions": ["*:*:*"]
+      },
+      {
+        "id": "editor",
+        "name": "编辑员",
+        "description": "拥有内容编辑权限",
+        "permissions": [
+          "home:*:*",
+          "catalog:*:*",
+          "resource:*:*",
+          "academic:*:*"
+        ]
+      },
+      {
+        "id": "operator",
+        "name": "录入员",
+        "description": "拥有数据录入权限",
+        "permissions": [
+          "catalog:*:add",
+          "catalog:*:edit",
+          "resource:*:add",
+          "resource:*:edit"
+        ]
+      }
+    ],
+    "settings": {
+      "defaultRoute": "/home/banner",
+      "menuCollapse": false,
+      "breadcrumb": true,
+      "tagsView": true,
+      "fixedHeader": true,
+      "sidebarLogo": true,
+      "theme": "default"
+    }
+  }
+}

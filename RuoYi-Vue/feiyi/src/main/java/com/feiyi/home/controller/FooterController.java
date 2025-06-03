@@ -28,7 +28,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2025-06-03
  */
 @RestController
-@RequestMapping("/home/tech-support")
+@RequestMapping("/home/techSupport")
 public class FooterController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class FooterController extends BaseController
     /**
      * 查询技术支持列表
      */
-    @PreAuthorize("@ss.hasPermi('home:tech-support:list')")
+    @PreAuthorize("@ss.hasPermi('home:techSupport:list')")
     @GetMapping("/list")
     public TableDataInfo list(Footer footer)
     {
@@ -49,7 +49,7 @@ public class FooterController extends BaseController
     /**
      * 导出技术支持列表
      */
-    @PreAuthorize("@ss.hasPermi('home:tech-support:export')")
+    @PreAuthorize("@ss.hasPermi('home:techSupport:export')")
     @Log(title = "技术支持", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Footer footer)
@@ -62,7 +62,7 @@ public class FooterController extends BaseController
     /**
      * 获取技术支持详细信息
      */
-    @PreAuthorize("@ss.hasPermi('home:tech-support:query')")
+    @PreAuthorize("@ss.hasPermi('home:techSupport:query')")
     @GetMapping(value = "/{footerId}")
     public AjaxResult getInfo(@PathVariable("footerId") Long footerId)
     {
@@ -72,7 +72,7 @@ public class FooterController extends BaseController
     /**
      * 新增技术支持
      */
-    @PreAuthorize("@ss.hasPermi('home:tech-support:add')")
+    @PreAuthorize("@ss.hasPermi('home:techSupport:add')")
     @Log(title = "技术支持", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Footer footer)
@@ -83,7 +83,7 @@ public class FooterController extends BaseController
     /**
      * 修改技术支持
      */
-    @PreAuthorize("@ss.hasPermi('home:tech-support:edit')")
+    @PreAuthorize("@ss.hasPermi('home:techSupport:edit')")
     @Log(title = "技术支持", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Footer footer)
@@ -94,7 +94,7 @@ public class FooterController extends BaseController
     /**
      * 删除技术支持
      */
-    @PreAuthorize("@ss.hasPermi('home:tech-support:remove')")
+    @PreAuthorize("@ss.hasPermi('home:techSupport:remove')")
     @Log(title = "技术支持", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{footerIds}")
     public AjaxResult remove(@PathVariable Long[] footerIds)

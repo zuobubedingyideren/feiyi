@@ -129,7 +129,7 @@
 </template>
 
 <script setup name="Banner">
-import { listBanner, getBanner, delBanner, addBanner, updateBanner } from "@/api/banner/banner"
+import { listBanner, getBanner, delBanner, addBanner, updateBanner } from "@/api/home/banner"
 
 const { proxy } = getCurrentInstance()
 
