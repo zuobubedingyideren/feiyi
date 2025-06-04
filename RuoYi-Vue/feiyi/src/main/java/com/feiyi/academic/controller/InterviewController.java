@@ -1,6 +1,8 @@
 package com.feiyi.academic.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.Anonymous;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,9 @@ public class InterviewController extends BaseController
     /**
      * 查询访谈，管理学者、传承人等访谈内容列表
      */
-    @PreAuthorize("@ss.hasPermi('academic:interview:list')")
+    // @PreAuthorize("@ss.hasPermi('academic:interview:list')")
     @GetMapping("/list")
+    @Anonymous
     public TableDataInfo list(Interview interview)
     {
         startPage();

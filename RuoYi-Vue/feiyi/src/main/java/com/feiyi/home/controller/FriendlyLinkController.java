@@ -1,6 +1,8 @@
 package com.feiyi.home.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.Anonymous;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,9 @@ public class FriendlyLinkController extends BaseController
     /**
      * 查询友情链接，管理页脚友情链接列表
      */
-    @PreAuthorize("@ss.hasPermi('home:footer:link:list')")
+    // @PreAuthorize("@ss.hasPermi('home:footer:link:list')")
     @GetMapping("/list")
+    @Anonymous
     public TableDataInfo list(FriendlyLink friendlyLink)
     {
         startPage();

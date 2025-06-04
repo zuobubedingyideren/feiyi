@@ -1,6 +1,8 @@
 package com.feiyi.resource.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.Anonymous;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,9 @@ public class MusicController extends BaseController
     /**
      * 查询音乐，管理音乐资源信息列表
      */
-    @PreAuthorize("@ss.hasPermi('resource:music:list')")
+    // @PreAuthorize("@ss.hasPermi('resource:music:list')")
     @GetMapping("/list")
+    @Anonymous
     public TableDataInfo list(Music music)
     {
         startPage();

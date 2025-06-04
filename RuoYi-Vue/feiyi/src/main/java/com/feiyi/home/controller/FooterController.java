@@ -1,6 +1,8 @@
 package com.feiyi.home.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.Anonymous;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,9 @@ public class FooterController extends BaseController
     /**
      * 查询技术支持列表
      */
-    @PreAuthorize("@ss.hasPermi('home:techSupport:list')")
+    // @PreAuthorize("@ss.hasPermi('home:techSupport:list')")
     @GetMapping("/list")
+    @Anonymous
     public TableDataInfo list(Footer footer)
     {
         startPage();

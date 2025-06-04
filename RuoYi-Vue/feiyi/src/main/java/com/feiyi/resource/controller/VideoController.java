@@ -1,6 +1,8 @@
 package com.feiyi.resource.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.Anonymous;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,9 @@ public class VideoController extends BaseController
     /**
      * 查询视频，管理视频资源信息列表
      */
-    @PreAuthorize("@ss.hasPermi('resource:video:list')")
+    // @PreAuthorize("@ss.hasPermi('resource:video:list')")
     @GetMapping("/list")
+    @Anonymous
     public TableDataInfo list(Video video)
     {
         startPage();

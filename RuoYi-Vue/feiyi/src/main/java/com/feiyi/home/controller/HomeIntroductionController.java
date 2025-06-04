@@ -1,6 +1,8 @@
 package com.feiyi.home.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.Anonymous;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,9 @@ public class HomeIntroductionController extends BaseController
     /**
      * 查询首页引言，管理首页引言内容列表
      */
-    @PreAuthorize("@ss.hasPermi('home:introduction:list')")
+    // @PreAuthorize("@ss.hasPermi('home:introduction:list')")
     @GetMapping("/list")
+    @Anonymous
     public TableDataInfo list(HomeIntroduction homeIntroduction)
     {
         startPage();

@@ -15,7 +15,7 @@ INSERT INTO banner (title, image_url, link_url, description, sort_order, created
 INSERT INTO home_introduction (title, content, created_by) VALUES
 ('青海非物质文化遗产数字博物馆', '青海非物质文化遗产数字博物馆致力于保护、传承和弘扬青海地区丰富多彩的非物质文化遗产。通过数字化手段，我们记录和展示了包括热贡艺术、唐卡、藏族歌舞、皮影戏、格萨尔史诗等在内的众多珍贵非遗项目，为公众提供了解青海文化瑰宝的窗口。本博物馆不仅是一个展示平台，更是连接过去与未来的桥梁，让传统文化在现代社会焕发新的生机与活力。', 1);
 
--- 3. 置顶项目表数据
+-- 3. 热门项目表数据
 INSERT INTO featured_project (project_id, cover_image, vertical_image, mask_effect, sort_order, created_by) VALUES
 (1, '/static/featured/cover1.jpg', '/static/featured/vertical1.jpg', 'gradient', 1, 1),
 (2, '/static/featured/cover2.jpg', '/static/featured/vertical2.jpg', 'gradient', 2, 1),
@@ -27,7 +27,7 @@ INSERT INTO footer_setting (tech_support_title, tech_support_content, copyright,
 
 -- 5. 友情链接表数据
 INSERT INTO friendly_link (link_name, link_url, link_logo, sort_order, created_by) VALUES
-('中国非物质文化遗产网', 'http://www.ihchina.cn/', '/static/links/ihchina.png', 1, 1),
+('中国非遗网', 'http://www.ihchina.cn/', '/static/links/ihchina.png', 1, 1),
 ('青海省文化和旅游厅', 'http://whly.qinghai.gov.cn/', '/static/links/qhwhj.png', 2, 1),
 ('中国文化遗产研究院', 'http://www.cach.org.cn/', '/static/links/cach.png', 3, 1),
 ('青海省博物馆', 'http://www.qhmuseum.cn/', '/static/links/qhmuseum.png', 4, 1),
@@ -55,12 +55,12 @@ INSERT INTO heritage_project (project_name, project_code, category_id, declarati
 ('热贡艺术', 'QH-2008-001', 2, '青海省黄南藏族自治州', 4, '第二批', 2008, '国发〔2008〕19号', '2008-06-07', 1, 2009, '人类非物质文化遗产代表作名录', '/static/projects/regong.jpg', '热贡艺术是青海省黄南藏族自治州的一种民间艺术的统称，包括唐卡、堆绣、壁画、雕塑等多种艺术形式。', '目前保护状况良好，已建立专门的保护中心和传承基地。', '热贡艺术起源于14世纪，由藏传佛教绘画发展而来，历史悠久。', '主要分布在青海省黄南藏族自治州同仁县的隆务河谷地区。', '以师徒传承为主，现已建立多个传承基地和培训中心。', '热贡艺术是藏族文化的重要组成部分，具有极高的艺术价值和文化价值。', '已建立专门的保护机构，制定了保护计划，并开展了数字化记录工作。', 1250, 1),
 ('唐卡艺术', 'QH-2008-002', 9, '青海省黄南藏族自治州', 4, '第二批', 2008, '国发〔2008〕19号', '2008-06-07', 0, NULL, NULL, '/static/projects/thangka.jpg', '唐卡是藏族文化中一种独特的绘画艺术形式，以宗教题材为主，用矿物颜料绘制在布上。', '保护状况良好，已有多个传承工作室和展览馆。', '唐卡艺术起源于公元7世纪，是藏传佛教艺术的重要组成部分。', '主要分布在青海、西藏、四川、甘肃等藏族聚居区。', '以家族传承和师徒传承相结合的方式进行传承。', '唐卡艺术不仅是宗教艺术，也是藏族历史文化的重要载体。', '已建立专门的保护机构，开展了系统的记录和研究工作。', 980, 1),
 ('藏族安多热巴舞', 'QH-2008-003', 11, '青海省海南藏族自治州', 4, '第二批', 2008, '国发〔2008〕19号', '2008-06-07', 0, NULL, NULL, '/static/projects/rebadance.jpg', '安多热巴舞是青海藏族地区流传的一种集体舞蹈，表演者围成圆圈，边唱边舞。', '保护状况良好，在本地仍广泛流传。', '安多热巴舞起源于古代藏族的祭祀活动，距今已有上千年历史。', '主要分布在青海省海南藏族自治州、果洛藏族自治州等地区。', '以社区传承为主，在节日和庆典活动中自然传承。', '安多热巴舞是藏族人民情感的重要表达方式，具有重要的文化价值。', '已开展了系统的记录工作，并在学校教育中加入相关内容。', 850, 1),
-('青海皮影戏', 'QH-2008-004', 12, '青海省海东市', 4, '第三批', 2011, '国发〔2011〕33号', '2011-05-23', 0, NULL, NULL, '/static/projects/shadow.jpg', '青海皮影戏是一种古老的民间艺术表演形式，使用兽皮或纸板制作的人物剪影，在灯光照射下产生影像。', '保护状况一般，面临传承人老龄化和观众减少的问题。', '青海皮影戏起源于唐代，距今已有上千年历史。', '主要分布在青海省海东市乐都区和民和回族土族自治县。', '以家族传承为主，现在已建立了传承基地。', '青海皮影戏是研究古代社会生活和民间文化的重要资料。', '已开展了抢救性记录工作，并举办了培训班培养新一代传承人。', 520, 1),
+('青海皮影戏', 'QH-2008-004', 12, '青海省海东市', 4, '第三批', 2011, '国发〔2011〕33号', '2011-05-23', 0, NULL, NULL, '/static/projects/shadow.jpg', '青海皮影戏是一种古老的民间艺术表演形式，使用兽皮或纸板制作的人物剪影，在灯光照射下产生影像。', '保护状况一般，面临传承人老龄化和观众减少的问题。', '青海皮影戏起源于唐代，距今已有上千年历史。', '主要分布在青海省海东市乐都区和民和回族土族自治县。', '以家族传承为主，现在已建立了传承基地。', '青海皮影戏是研究古代社会生活和民间文化的重要资料。', '已开展了抢救性记录工作，并举办了培训班培训新一代传承人。', 520, 1),
 ('格萨尔史诗', 'QH-2006-001', 8, '青海省果洛藏族自治州', 4, '第一批', 2006, '国发〔2006〕18号', '2006-05-20', 1, 2009, '人类非物质文化遗产代表作名录', '/static/projects/gesar.jpg', '格萨尔史诗是世界上最长的史诗之一，讲述了藏族英雄格萨尔王的故事。', '保护状况良好，已建立专门的保护机构和数据库。', '格萨尔史诗形成于公元11世纪左右，经过千年口头传承和发展。', '主要分布在青海、西藏、四川、甘肃等藏族聚居区。', '以口头传承为主，现在也通过文字记录和数字化手段保存。', '格萨尔史诗是研究藏族历史文化的重要资料，具有极高的文学价值和历史价值。', '已开展了系统的记录和研究工作，并建立了专门的保护中心。', 1100, 1);
 
 -- 3. 传承人表数据
 INSERT INTO heritage_inheritor (inheritor_name, gender, birth_date, nation, native_place, id_card, contact_phone, address, project_id, inheritor_level, approval_number, approval_date, approval_batch, avatar, inheritor_desc, skill_desc, inheritance_mode, inheritance_achievement, created_by) VALUES
-('才让多杰', 1, '1962-05-15', '藏族', '青海省黄南藏族自治州同仁县', '632321196205150012', '13909701234', '青海省黄南藏族自治州同仁县隆务镇', 1, 4, '文化部〔2008〕12号', '2008-06-07', '第二批', '/static/inheritors/cairang.jpg', '才让多杰是热贡艺术唐卡画派的代表性传承人，从事唐卡创作40余年。', '擅长勾线精细、色彩艳丽的热贡唐卡创作，作品多次获得国家级奖项。', '收徒传艺，已培养学生30余人，并在当地建立了传习所。', '创作唐卡作品200余幅，多次参加国内外展览，出版专著2部。', 1),
+('才让多杰', 1, '1962-05-15', '藏族', '青海省黄南藏族自治州同仁县', '632321196205150012', '13909701234', '青海省黄南藏族自治州同仁县隆务镇', 1, 4, '文化部〔2008〕12号', '2008-06-07', '第二批', '/static/inheritors/cairang.jpg', '才让多杰是热贡艺术唐卡画派的代表性传承人，从事唐卡创作40余年。', '擅长勾线精细、色彩艳丽的热贡唐卡创作，作品多次获得国家级奖项。', '收徒传艺，已为学生30余人，并在当地建立了传习所。', '创作唐卡作品200余幅，多次参加国内外展览，出版专著2部。', 1),
 ('尼玛旺堆', 1, '1965-08-23', '藏族', '青海省黄南藏族自治州同仁县', '632321196508230034', '13909702345', '青海省黄南藏族自治州同仁县隆务镇', 2, 4, '文化部〔2008〕12号', '2008-06-07', '第二批', '/static/inheritors/nima.jpg', '尼玛旺堆是唐卡艺术的代表性传承人，从事唐卡创作35余年。', '擅长新勉唐卡画派，色彩鲜艳，人物形象生动。', '以家族传承为主，同时在当地艺术学校任教。', '创作唐卡作品150余幅，作品被多家博物馆收藏。', 1),
 ('卓玛央金', 2, '1972-11-05', '藏族', '青海省海南藏族自治州共和县', '632521197211050028', '13909703456', '青海省海南藏族自治州共和县恰卜恰镇', 3, 3, '青海省文化厅〔2010〕45号', '2010-09-15', '第三批', '/static/inheritors/zhuoma.jpg', '卓玛央金是藏族安多热巴舞的代表性传承人，从事舞蹈表演和教学30余年。', '擅长安多地区特有的热巴舞表演技巧，动作舒展大方，节奏感强。', '在当地社区和学校开展教学活动，培养了大量年轻一代传承人。', '组建了热巴舞表演团队，多次参加国内外文化交流活动。', 1),
 ('马福祥', 1, '1955-02-18', '回族', '青海省海东市乐都区', '632123195502180056', '13909704567', '青海省海东市乐都区碾伯镇', 4, 3, '青海省文化厅〔2012〕38号', '2012-07-20', '第四批', '/static/inheritors/mafuxiang.jpg', '马福祥是青海皮影戏的代表性传承人，从事皮影戏表演和制作50余年。', '擅长皮影人物制作和多种角色的配音表演，保留了传统的表演曲目。', '以家族传承为主，已将技艺传授给子女和徒弟。', '保存了上百个传统皮影戏剧目，制作了数百个皮影人物。', 1),
@@ -93,21 +93,7 @@ INSERT INTO photo (album_id, photo_title, photo_url, photo_desc, shooting_time, 
 (5, '史诗记录工作', '/static/photos/gesar2.jpg', '研究人员对格萨尔史诗进行录音记录', '2018-10-11 09:30:00', '青海省果洛藏族自治州玛沁县', '/static/watermarks/museum.png', 2, 1),
 (5, '格萨尔文化展示', '/static/photos/gesar3.jpg', '格萨尔文化展览现场', '2018-10-12 14:00:00', '青海省西宁市青海民族大学', '/static/watermarks/museum.png', 3, 1);
 
--- 3. 音乐表数据
-INSERT INTO music (music_title, music_url, cover_image, artist, album, duration, music_desc, related_project_id, play_count, created_by) VALUES
-('藏族安多民歌《拉伊》', '/static/music/layi.mp3', '/static/music/covers/layi.jpg', '卓玛央金', '藏族传统音乐集', '05:30', '《拉伊》是青海藏族地区流传的一种传统民歌，表达对家乡和亲人的思念之情。', 3, 320, 1),
-('格萨尔王传奇', '/static/music/gesar.mp3', '/static/music/covers/gesar.jpg', '扎西尼玛', '格萨尔史诗选段', '12:45', '格萨尔王传奇是格萨尔史诗中的经典选段，讲述了英雄降生的故事。', 5, 280, 1),
-('热贡艺术颂', '/static/music/regong.mp3', '/static/music/covers/regong.jpg', '才让多杰', '非遗之声', '06:20', '这是一首赞美热贡艺术的现代创作歌曲，由热贡艺术传承人演唱。', 1, 210, 1),
-('唐卡祈福曲', '/static/music/thangka.mp3', '/static/music/covers/thangka.jpg', '尼玛旺堆', '藏传佛教音乐集', '08:15', '这是创作唐卡时常听的传统祈福音乐，有助于艺术创作的专注和虔诚。', 2, 180, 1),
-('皮影戏曲牌', '/static/music/shadow.mp3', '/static/music/covers/shadow.jpg', '马福祥', '青海皮影音乐集', '04:50', '这是青海皮影戏表演中使用的传统曲牌，具有鲜明的地方特色。', 4, 150, 1);
 
--- 4. 视频表数据
-INSERT INTO video (video_title, video_url, cover_image, director, duration, video_desc, related_project_id, play_count, created_by) VALUES
-('热贡艺术传承纪实', '/static/videos/regong.mp4', '/static/videos/covers/regong.jpg', '张明', '25:30', '本纪录片全面记录了热贡艺术的历史、工艺特点和当代传承情况。', 1, 480, 1),
-('唐卡艺术的前世今生', '/static/videos/thangka.mp4', '/static/videos/covers/thangka.jpg', '李红', '30:15', '本纪录片详细介绍了唐卡艺术的历史渊源、绘制工艺和文化内涵。', 2, 420, 1),
-('藏族安多热巴舞传习实录', '/static/videos/dance.mp4', '/static/videos/covers/dance.jpg', '王刚', '18:45', '本视频记录了藏族安多热巴舞的教学和传承过程。', 3, 350, 1),
-('青海皮影戏表演艺术', '/static/videos/shadow.mp4', '/static/videos/covers/shadow.jpg', '赵亮', '22:10', '本纪录片展示了青海皮影戏的表演技巧和艺术特色。', 4, 280, 1),
-('格萨尔史诗传唱者', '/static/videos/gesar.mp4', '/static/videos/covers/gesar.jpg', '陈强', '35:20', '本纪录片记录了格萨尔史诗传承人的生活和艺术实践。', 5, 520, 1);
 
 -- 学术管理模块示例数据
 -- 1. 学术文章表数据
@@ -176,15 +162,6 @@ INSERT INTO photo (album_id, photo_url, photo_title, photo_desc, photographer, p
 (5, '/static/photos/gesar/illustration1.jpg', '格萨尔王出征图', '描绘格萨尔王出征场面的插图', '扎西达杰', '2019-09-20', 300, 1),
 (5, '/static/photos/gesar/manuscript1.jpg', '格萨尔史诗手稿', '珍贵的格萨尔史诗藏文手稿', '扎西达杰', '2019-09-22', 280, 1);
 
--- 3. 音乐表数据
-INSERT INTO music (music_title, artist, album_name, music_url, cover_image, duration, music_desc, related_project_id, view_count, created_by) VALUES
-('热贡艺术赞歌', '才让多杰', '热贡之声', '/static/music/regong_praise.mp3', '/static/music/covers/regong_praise.jpg', '00:04:32', '赞美热贡艺术的传统歌曲，由传承人才让多杰演唱', 1, 680, 1),
-('唐卡绘制工作歌', '尼玛旺堆', '画师心声', '/static/music/thangka_work.mp3', '/static/music/covers/thangka_work.jpg', '00:03:45', '唐卡画师在工作时常唱的传统歌曲', 2, 520, 1),
-('安多热巴舞曲', '卓玛央金', '草原之舞', '/static/music/reba_dance.mp3', '/static/music/covers/reba_dance.jpg', '00:05:18', '配合安多热巴舞表演的传统音乐', 3, 750, 1),
-('皮影戏配乐《白蛇传》', '马福祥', '皮影戏音乐集', '/static/music/shadow_baishe.mp3', '/static/music/covers/shadow_music.jpg', '00:06:20', '青海皮影戏《白蛇传》的传统配乐', 4, 420, 1),
-('格萨尔史诗说唱', '扎西尼玛', '英雄史诗', '/static/music/gesar_epic.mp3', '/static/music/covers/gesar_epic.jpg', '00:12:35', '格萨尔史诗的传统说唱片段', 5, 890, 1),
-('藏族民歌《阿妈拉》', '德吉措', '高原之声', '/static/music/ama_la.mp3', '/static/music/covers/ama_la.jpg', '00:04:15', 'raditional藏族民歌，表达对母亲的思念', NULL, 650, 1),
-('青海花儿《上去高山望平川》', '韩起祥', '花儿集锦', '/static/music/huaer_gaoshang.mp3', '/static/music/covers/huaer.jpg', '00:03:52', '青海地区流传的经典花儿曲目', NULL, 580, 1);
 
 -- 4. 视频表数据
 INSERT INTO video (video_title, director, video_url, cover_image, duration, video_desc, related_project_id, view_count, created_by) VALUES

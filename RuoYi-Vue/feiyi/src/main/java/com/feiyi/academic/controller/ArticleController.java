@@ -1,6 +1,8 @@
 package com.feiyi.academic.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.Anonymous;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,9 @@ public class ArticleController extends BaseController
     /**
      * 查询学术文章，管理学术研究类文章信息列表
      */
-    @PreAuthorize("@ss.hasPermi('academic:article:list')")
+    // @PreAuthorize("@ss.hasPermi('academic:article:list')")
     @GetMapping("/list")
+    @Anonymous
     public TableDataInfo list(Article article)
     {
         startPage();
