@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feiyi.academic.mapper.InterviewMapper">
+    
+    <resultMap type="Interview" id="InterviewResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="interviewee"    column="interviewee"    />
+        <result property="avatarUrl"    column="avatar_url"    />
+        <result property="shortBio"    column="short_bio"    />
+        <result property="interviewDate"    column="interview_date"    />
+        <result property="content"    column="content"    />
+        <result property="featured"    column="featured"    />
+        <result property="viewCount"    column="view_count"    />
+        <result property="displayOrder"    column="display_order"    />
+        <result property="status"    column="status"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="updatedBy"    column="updated_by"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="deletedAt"    column="deleted_at"    />
+        <result property="deletedBy"    column="deleted_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectInterviewVo">
+        select id, title, interviewee, avatar_url, short_bio, interview_date, content, featured, view_count, display_order, status, created_at, updated_at, created_by, updated_by, del_flag, deleted_at, deleted_by, remark from interview
+    </sql>
+
+    <select id="selectInterviewList" parameterType="Interview" resultMap="InterviewResult">
+        <include refid="selectInterviewVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="interviewee != null  and interviewee != ''"> and interviewee like concat('%', #{interviewee}, '%')</if>
+            <if test="shortBio != null  and shortBio != ''"> and short_bio like concat('%', #{shortBio}, '%')</if>
+            <if test="interviewDate != null "> and interview_date = #{interviewDate}</if>
+            <if test="featured != null "> and featured = #{featured}</if>
+            <if test="viewCount != null "> and view_count &gt;= #{viewCount}</if>
+            <if test="displayOrder != null "> and display_order = #{displayOrder}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectInterviewById" parameterType="Long" resultMap="InterviewResult">
+        <include refid="selectInterviewVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertInterview" parameterType="Interview" useGeneratedKeys="true" keyProperty="id">
+        insert into interview
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="interviewee != null and interviewee != ''">interviewee,</if>
+            <if test="avatarUrl != null">avatar_url,</if>
+            <if test="shortBio != null and shortBio != ''">short_bio,</if>
+            <if test="interviewDate != null">interview_date,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="featured != null">featured,</if>
+            <if test="viewCount != null">view_count,</if>
+            <if test="displayOrder != null">display_order,</if>
+            <if test="status != null">status,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="updatedBy != null">updated_by,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="deletedAt != null">deleted_at,</if>
+            <if test="deletedBy != null">deleted_by,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="interviewee != null and interviewee != ''">#{interviewee},</if>
+            <if test="avatarUrl != null">#{avatarUrl},</if>
+            <if test="shortBio != null and shortBio != ''">#{shortBio},</if>
+            <if test="interviewDate != null">#{interviewDate},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="featured != null">#{featured},</if>
+            <if test="viewCount != null">#{viewCount},</if>
+            <if test="displayOrder != null">#{displayOrder},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="updatedBy != null">#{updatedBy},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="deletedAt != null">#{deletedAt},</if>
+            <if test="deletedBy != null">#{deletedBy},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateInterview" parameterType="Interview">
+        update interview
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="interviewee != null and interviewee != ''">interviewee = #{interviewee},</if>
+            <if test="avatarUrl != null">avatar_url = #{avatarUrl},</if>
+            <if test="shortBio != null and shortBio != ''">short_bio = #{shortBio},</if>
+            <if test="interviewDate != null">interview_date = #{interviewDate},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="featured != null">featured = #{featured},</if>
+            <if test="viewCount != null">view_count = #{viewCount},</if>
+            <if test="displayOrder != null">display_order = #{displayOrder},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="updatedBy != null">updated_by = #{updatedBy},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="deletedAt != null">deleted_at = #{deletedAt},</if>
+            <if test="deletedBy != null">deleted_by = #{deletedBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteInterviewById" parameterType="Long">
+        delete from interview where id = #{id}
+    </delete>
+
+    <delete id="deleteInterviewByIds" parameterType="String">
+        delete from interview where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
