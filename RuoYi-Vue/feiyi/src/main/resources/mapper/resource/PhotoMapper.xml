@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feiyi.resource.mapper.PhotoMapper">
+    
+    <resultMap type="Photo" id="PhotoResult">
+        <result property="id"    column="id"    />
+        <result property="albumId"    column="album_id"    />
+        <result property="photoTitle"    column="photo_title"    />
+        <result property="photoUrl"    column="photo_url"    />
+        <result property="photoDesc"    column="photo_desc"    />
+        <result property="watermarkUrl"    column="watermark_url"    />
+        <result property="watermarkPosition"    column="watermark_position"    />
+        <result property="watermarkOpacity"    column="watermark_opacity"    />
+        <result property="sortOrder"    column="sort_order"    />
+        <result property="status"    column="status"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="updatedBy"    column="updated_by"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="deletedAt"    column="deleted_at"    />
+        <result property="deletedBy"    column="deleted_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPhotoVo">
+        select id, album_id, photo_title, photo_url, photo_desc, watermark_url, watermark_position, watermark_opacity, sort_order, status, created_at, updated_at, created_by, updated_by, del_flag, deleted_at, deleted_by, remark from photo
+    </sql>
+
+    <select id="selectPhotoList" parameterType="Photo" resultMap="PhotoResult">
+        <include refid="selectPhotoVo"/>
+        <where>  
+            <if test="albumId != null "> and album_id = #{albumId}</if>
+            <if test="photoTitle != null  and photoTitle != ''"> and photo_title like concat('%', #{photoTitle}, '%')</if>
+            <if test="photoDesc != null  and photoDesc != ''"> and photo_desc like concat('%', #{photoDesc}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectPhotoById" parameterType="Long" resultMap="PhotoResult">
+        <include refid="selectPhotoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPhoto" parameterType="Photo" useGeneratedKeys="true" keyProperty="id">
+        insert into photo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="albumId != null">album_id,</if>
+            <if test="photoTitle != null and photoTitle != ''">photo_title,</if>
+            <if test="photoUrl != null and photoUrl != ''">photo_url,</if>
+            <if test="photoDesc != null and photoDesc != ''">photo_desc,</if>
+            <if test="watermarkUrl != null and watermarkUrl != ''">watermark_url,</if>
+            <if test="watermarkPosition != null and watermarkPosition != ''">watermark_position,</if>
+            <if test="watermarkOpacity != null">watermark_opacity,</if>
+            <if test="sortOrder != null">sort_order,</if>
+            <if test="status != null">status,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="updatedBy != null">updated_by,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="deletedAt != null">deleted_at,</if>
+            <if test="deletedBy != null">deleted_by,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="albumId != null">#{albumId},</if>
+            <if test="photoTitle != null and photoTitle != ''">#{photoTitle},</if>
+            <if test="photoUrl != null and photoUrl != ''">#{photoUrl},</if>
+            <if test="photoDesc != null and photoDesc != ''">#{photoDesc},</if>
+            <if test="watermarkUrl != null and watermarkUrl != ''">#{watermarkUrl},</if>
+            <if test="watermarkPosition != null and watermarkPosition != ''">#{watermarkPosition},</if>
+            <if test="watermarkOpacity != null">#{watermarkOpacity},</if>
+            <if test="sortOrder != null">#{sortOrder},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="updatedBy != null">#{updatedBy},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="deletedAt != null">#{deletedAt},</if>
+            <if test="deletedBy != null">#{deletedBy},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePhoto" parameterType="Photo">
+        update photo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="albumId != null">album_id = #{albumId},</if>
+            <if test="photoTitle != null and photoTitle != ''">photo_title = #{photoTitle},</if>
+            <if test="photoUrl != null and photoUrl != ''">photo_url = #{photoUrl},</if>
+            <if test="photoDesc != null and photoDesc != ''">photo_desc = #{photoDesc},</if>
+            <if test="watermarkUrl != null and watermarkUrl != ''">watermark_url = #{watermarkUrl},</if>
+            <if test="watermarkPosition != null and watermarkPosition != ''">watermark_position = #{watermarkPosition},</if>
+            <if test="watermarkOpacity != null">watermark_opacity = #{watermarkOpacity},</if>
+            <if test="sortOrder != null">sort_order = #{sortOrder},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="updatedBy != null">updated_by = #{updatedBy},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="deletedAt != null">deleted_at = #{deletedAt},</if>
+            <if test="deletedBy != null">deleted_by = #{deletedBy},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePhotoById" parameterType="Long">
+        delete from photo where id = #{id}
+    </delete>
+
+    <delete id="deletePhotoByIds" parameterType="String">
+        delete from photo where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feiyi.resource.mapper.PhotoAlbumMapper">
+    
+    <resultMap type="PhotoAlbum" id="PhotoAlbumResult">
+        <result property="id"    column="id"    />
+        <result property="albumName"    column="album_name"    />
+        <result property="albumYear"    column="album_year"    />
+        <result property="photographer"    column="photographer"    />
+        <result property="photographerBio"    column="photographer_bio"    />
+        <result property="albumDesc"    column="album_desc"    />
+        <result property="coverImage"    column="cover_image"    />
+        <result property="releaseDate"    column="release_date"    />
+        <result property="publisher"    column="publisher"    />
+        <result property="copyright"    column="copyright"    />
+        <result property="viewCount"    column="view_count"    />
+        <result property="status"    column="status"    />
+        <result property="isFeatured"    column="is_featured"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="updatedBy"    column="updated_by"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="deletedAt"    column="deleted_at"    />
+        <result property="deletedBy"    column="deleted_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap id="PhotoAlbumPhotoResult" type="PhotoAlbum" extends="PhotoAlbumResult">
+        <collection property="photoList" ofType="Photo" column="id" select="selectPhotoList" />
+    </resultMap>
+
+    <resultMap type="Photo" id="PhotoResult">
+        <result property="id"    column="id"    />
+        <result property="albumId"    column="album_id"    />
+        <result property="photoTitle"    column="photo_title"    />
+        <result property="photoUrl"    column="photo_url"    />
+        <result property="photoDesc"    column="photo_desc"    />
+        <result property="watermarkUrl"    column="watermark_url"    />
+        <result property="watermarkPosition"    column="watermark_position"    />
+        <result property="watermarkOpacity"    column="watermark_opacity"    />
+        <result property="sortOrder"    column="sort_order"    />
+        <result property="status"    column="status"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="updatedBy"    column="updated_by"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="deletedAt"    column="deleted_at"    />
+        <result property="deletedBy"    column="deleted_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPhotoAlbumVo">
+        select id, album_name, album_year, photographer, photographer_bio, album_desc, cover_image, release_date, publisher, copyright, view_count, status, is_featured, created_at, updated_at, created_by, updated_by, del_flag, deleted_at, deleted_by, remark from photo_album
+    </sql>
+
+    <select id="selectPhotoAlbumList" parameterType="PhotoAlbum" resultMap="PhotoAlbumResult">
+        <include refid="selectPhotoAlbumVo"/>
+        <where>  
+            <if test="albumName != null  and albumName != ''"> and album_name like concat('%', #{albumName}, '%')</if>
+            <if test="albumYear != null "> and album_year &gt;= #{albumYear}</if>
+            <if test="photographer != null  and photographer != ''"> and photographer like concat('%', #{photographer}, '%')</if>
+            <if test="photographerBio != null  and photographerBio != ''"> and photographer_bio like concat('%', #{photographerBio}, '%')</if>
+            <if test="albumDesc != null  and albumDesc != ''"> and album_desc like concat('%', #{albumDesc}, '%')</if>
+            <if test="releaseDate != null "> and release_date = #{releaseDate}</if>
+            <if test="publisher != null  and publisher != ''"> and publisher = #{publisher}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isFeatured != null "> and is_featured = #{isFeatured}</if>
+        </where>
+    </select>
+    
+    <select id="selectPhotoAlbumById" parameterType="Long" resultMap="PhotoAlbumPhotoResult">
+        select id, album_name, album_year, photographer, photographer_bio, album_desc, cover_image, release_date, publisher, copyright, view_count, status, is_featured, created_at, updated_at, created_by, updated_by, del_flag, deleted_at, deleted_by, remark
+        from photo_album
+        where id = #{id}
+    </select>
+
+    <select id="selectPhotoList" resultMap="PhotoResult">
+        select id, album_id, photo_title, photo_url, photo_desc, watermark_url, watermark_position, watermark_opacity, sort_order, status, created_at, updated_at, created_by, updated_by, del_flag, deleted_at, deleted_by, remark
+        from photo
+        where album_id = #{album_id}
+    </select>
+
+    <insert id="insertPhotoAlbum" parameterType="PhotoAlbum" useGeneratedKeys="true" keyProperty="id">
+        insert into photo_album
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="albumName != null and albumName != ''">album_name,</if>
+            <if test="albumYear != null">album_year,</if>
+            <if test="photographer != null and photographer != ''">photographer,</if>
+            <if test="photographerBio != null and photographerBio != ''">photographer_bio,</if>
+            <if test="albumDesc != null and albumDesc != ''">album_desc,</if>
+            <if test="coverImage != null and coverImage != ''">cover_image,</if>
+            <if test="releaseDate != null">release_date,</if>
+            <if test="publisher != null and publisher != ''">publisher,</if>
+            <if test="copyright != null">copyright,</if>
+            <if test="viewCount != null">view_count,</if>
+            <if test="status != null">status,</if>
+            <if test="isFeatured != null">is_featured,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="updatedBy != null">updated_by,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="deletedAt != null">deleted_at,</if>
+            <if test="deletedBy != null">deleted_by,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="albumName != null and albumName != ''">#{albumName},</if>
+            <if test="albumYear != null">#{albumYear},</if>
+            <if test="photographer != null and photographer != ''">#{photographer},</if>
+            <if test="photographerBio != null and photographerBio != ''">#{photographerBio},</if>
+            <if test="albumDesc != null and albumDesc != ''">#{albumDesc},</if>
+            <if test="coverImage != null and coverImage != ''">#{coverImage},</if>
+            <if test="releaseDate != null">#{releaseDate},</if>
+            <if test="publisher != null and publisher != ''">#{publisher},</if>
+            <if test="copyright != null">#{copyright},</if>
+            <if test="viewCount != null">#{viewCount},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isFeatured != null">#{isFeatured},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="updatedBy != null">#{updatedBy},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="deletedAt != null">#{deletedAt},</if>
+            <if test="deletedBy != null">#{deletedBy},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePhotoAlbum" parameterType="PhotoAlbum">
+        update photo_album
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="albumName != null and albumName != ''">album_name = #{albumName},</if>
+            <if test="albumYear != null">album_year = #{albumYear},</if>
+            <if test="photographer != null and photographer != ''">photographer = #{photographer},</if>
+            <if test="photographerBio != null and photographerBio != ''">photographer_bio = #{photographerBio},</if>
+            <if test="albumDesc != null and albumDesc != ''">album_desc = #{albumDesc},</if>
+            <if test="coverImage != null and coverImage != ''">cover_image = #{coverImage},</if>
+            <if test="releaseDate != null">release_date = #{releaseDate},</if>
+            <if test="publisher != null and publisher != ''">publisher = #{publisher},</if>
+            <if test="copyright != null">copyright = #{copyright},</if>
+            <if test="viewCount != null">view_count = #{viewCount},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isFeatured != null">is_featured = #{isFeatured},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="updatedBy != null">updated_by = #{updatedBy},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="deletedAt != null">deleted_at = #{deletedAt},</if>
+            <if test="deletedBy != null">deleted_by = #{deletedBy},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePhotoAlbumById" parameterType="Long">
+        delete from photo_album where id = #{id}
+    </delete>
+
+    <delete id="deletePhotoAlbumByIds" parameterType="String">
+        delete from photo_album where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <delete id="deletePhotoByAlbumIds" parameterType="String">
+        delete from photo where album_id in 
+        <foreach item="albumId" collection="array" open="(" separator="," close=")">
+            #{albumId}
+        </foreach>
+    </delete>
+
+    <delete id="deletePhotoByAlbumId" parameterType="Long">
+        delete from photo where album_id = #{albumId}
+    </delete>
+
+    <insert id="batchPhoto">
+        insert into photo( id, album_id, photo_title, photo_url, photo_desc, watermark_url, watermark_position, watermark_opacity, sort_order, status, created_at, updated_at, created_by, updated_by, del_flag, deleted_at, deleted_by, remark) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.id}, #{item.albumId}, #{item.photoTitle}, #{item.photoUrl}, #{item.photoDesc}, #{item.watermarkUrl}, #{item.watermarkPosition}, #{item.watermarkOpacity}, #{item.sortOrder}, #{item.status}, #{item.createdAt}, #{item.updatedAt}, #{item.createdBy}, #{item.updatedBy}, #{item.delFlag}, #{item.deletedAt}, #{item.deletedBy}, #{item.remark})
+        </foreach>
+    </insert>
+</mapper>
