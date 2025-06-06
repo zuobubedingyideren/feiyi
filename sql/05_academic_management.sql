@@ -145,51 +145,12 @@ CREATE TABLE course (
     -- 基本信息
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '课程唯一标识，自增主键',
     course_name VARCHAR(200) NOT NULL COMMENT '课程名称',
-    course_code VARCHAR(50) COMMENT '课程编号',
-    instructor VARCHAR(100) COMMENT '授课教师',
-    co_instructors TEXT COMMENT '协同教师，多个教师用逗号分隔',
     cover_image VARCHAR(255) COMMENT '课程封面图片',
     
-    -- 课程内容
-    course_desc TEXT COMMENT '课程描述',
-    course_objectives TEXT COMMENT '课程目标',
-    course_outline LONGTEXT COMMENT '课程大纲',
-    prerequisites VARCHAR(500) COMMENT '先修课程',
-    
-    -- 课程信息
-    course_type TINYINT DEFAULT 1 COMMENT '课程类型：1-理论课，2-实践课，3-理论+实践，4-其他',
-    course_level TINYINT DEFAULT 1 COMMENT '课程级别：1-入门，2-中级，3-高级，4-专家',
-    credit_hours DECIMAL(3,1) COMMENT '学分',
-    total_hours INT COMMENT '总学时',
-    course_duration VARCHAR(50) COMMENT '课程时长',
-    
-    -- 开课信息
-    semester VARCHAR(50) COMMENT '开课学期',
-    academic_year VARCHAR(20) COMMENT '学年',
-    start_date DATE COMMENT '开课日期',
-    end_date DATE COMMENT '结课日期',
-    class_schedule VARCHAR(200) COMMENT '上课时间安排',
-    classroom VARCHAR(100) COMMENT '教室',
-    
-    -- 招生信息
-    max_students INT COMMENT '最大招生人数',
-    enrolled_students INT DEFAULT 0 COMMENT '已报名人数',
-    tuition_fee DECIMAL(10,2) COMMENT '学费',
-    
-    -- 课程资源
-    syllabus_url VARCHAR(500) COMMENT '教学大纲URL',
-    materials_url VARCHAR(500) COMMENT '教学材料URL',
-    video_url VARCHAR(500) COMMENT '课程视频URL',
-    
-    -- 统计信息
-    view_count INT DEFAULT 0 COMMENT '浏览次数',
-    enrollment_count INT DEFAULT 0 COMMENT '累计报名人数',
-    completion_rate DECIMAL(5,2) COMMENT '完成率（百分比）',
+  
     featured TINYINT DEFAULT 0 COMMENT '是否推荐：1-推荐，0-不推荐',
     display_order INT DEFAULT 0 COMMENT '显示顺序',
     
-    -- 状态信息
-    status TINYINT DEFAULT 1 COMMENT '状态：1-开放报名，2-进行中，3-已结束，4-暂停，0-隐藏',
     
     -- 审计字段
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
@@ -203,43 +164,9 @@ CREATE TABLE course (
     
     -- 索引
     INDEX idx_course_name (course_name) COMMENT '课程名称索引',
-    INDEX idx_course_code (course_code) COMMENT '课程编号索引',
-    INDEX idx_instructor (instructor) COMMENT '授课教师索引',
-    INDEX idx_course_type (course_type) COMMENT '课程类型索引',
-    INDEX idx_course_level (course_level) COMMENT '课程级别索引',
-    INDEX idx_semester (semester) COMMENT '开课学期索引',
-    INDEX idx_start_date (start_date) COMMENT '开课日期索引',
     INDEX idx_featured (featured) COMMENT '推荐索引',
     INDEX idx_display_order (display_order) COMMENT '显示顺序索引',
-    INDEX idx_status (status) COMMENT '状态索引',
     INDEX idx_del_flag (del_flag) COMMENT '删除状态索引'
 ) COMMENT '课程表，管理课程信息';
 
--- --------------------------------------------------------
--- 课程章节表：管理课程下的章节内容
--- --------------------------------------------------------
-CREATE TABLE course_chapter (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '课程章节唯一标识，自增主键',
-    course_id BIGINT NOT NULL COMMENT '所属课程ID，外键关联course表',
-    chapter_name VARCHAR(200) NOT NULL COMMENT '章节名称',
-    content TEXT COMMENT '章节内容',
-    video_url VARCHAR(255) COMMENT '章节视频地址',
-    chapter_order INT DEFAULT 0 COMMENT '章节顺序',
-    status TINYINT DEFAULT 1 COMMENT '章节状态：1-显示，0-隐藏',
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
-    updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '记录更新时间',
-    created_by BIGINT COMMENT '创建人ID',
-    updated_by BIGINT COMMENT '更新人ID',
-    del_flag TINYINT DEFAULT 0 COMMENT '逻辑删除标志：0-未删除，1-已删除',
-    deleted_at DATETIME COMMENT '删除时间',
-    deleted_by BIGINT COMMENT '删除人ID',
-    remark VARCHAR(255) COMMENT '备注',
-    
-    -- 外键约束
-    FOREIGN KEY (course_id) REFERENCES course(id) ON DELETE CASCADE,
-    
-    INDEX idx_course_id (course_id) COMMENT '所属课程ID索引',
-    INDEX idx_chapter_order (chapter_order) COMMENT '章节顺序索引',
-    INDEX idx_status (status) COMMENT '状态索引',
-    INDEX idx_del_flag (del_flag) COMMENT '删除状态索引'
-) COMMENT '课程章节表，管理课程下的章节内容';
+

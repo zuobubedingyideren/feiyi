@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feiyi.academic.mapper.CourseMapper">
+    
+    <resultMap type="Course" id="CourseResult">
+        <result property="id"    column="id"    />
+        <result property="courseName"    column="course_name"    />
+        <result property="coverImage"    column="cover_image"    />
+        <result property="featured"    column="featured"    />
+        <result property="displayOrder"    column="display_order"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="updatedBy"    column="updated_by"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="deletedAt"    column="deleted_at"    />
+        <result property="deletedBy"    column="deleted_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectCourseVo">
+        select id, course_name, cover_image, featured, display_order, created_at, updated_at, created_by, updated_by, del_flag, deleted_at, deleted_by, remark from course
+    </sql>
+
+    <select id="selectCourseList" parameterType="Course" resultMap="CourseResult">
+        <include refid="selectCourseVo"/>
+        <where>  
+            <if test="courseName != null  and courseName != ''"> and course_name like concat('%', #{courseName}, '%')</if>
+            <if test="featured != null "> and featured = #{featured}</if>
+            <if test="displayOrder != null "> and display_order = #{displayOrder}</if>
+        </where>
+    </select>
+    
+    <select id="selectCourseById" parameterType="Long" resultMap="CourseResult">
+        <include refid="selectCourseVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCourse" parameterType="Course" useGeneratedKeys="true" keyProperty="id">
+        insert into course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="courseName != null and courseName != ''">course_name,</if>
+            <if test="coverImage != null and coverImage != ''">cover_image,</if>
+            <if test="featured != null">featured,</if>
+            <if test="displayOrder != null">display_order,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="updatedBy != null">updated_by,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="deletedAt != null">deleted_at,</if>
+            <if test="deletedBy != null">deleted_by,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="courseName != null and courseName != ''">#{courseName},</if>
+            <if test="coverImage != null and coverImage != ''">#{coverImage},</if>
+            <if test="featured != null">#{featured},</if>
+            <if test="displayOrder != null">#{displayOrder},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="updatedBy != null">#{updatedBy},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="deletedAt != null">#{deletedAt},</if>
+            <if test="deletedBy != null">#{deletedBy},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCourse" parameterType="Course">
+        update course
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="courseName != null and courseName != ''">course_name = #{courseName},</if>
+            <if test="coverImage != null and coverImage != ''">cover_image = #{coverImage},</if>
+            <if test="featured != null">featured = #{featured},</if>
+            <if test="displayOrder != null">display_order = #{displayOrder},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="updatedBy != null">updated_by = #{updatedBy},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="deletedAt != null">deleted_at = #{deletedAt},</if>
+            <if test="deletedBy != null">deleted_by = #{deletedBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCourseById" parameterType="Long">
+        delete from course where id = #{id}
+    </delete>
+
+    <delete id="deleteCourseByIds" parameterType="String">
+        delete from course where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
