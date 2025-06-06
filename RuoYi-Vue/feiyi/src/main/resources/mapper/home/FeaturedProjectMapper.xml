@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feiyi.home.mapper.FeaturedProjectMapper">
+    
+    <resultMap type="FeaturedProject" id="FeaturedProjectResult">
+        <result property="id"    column="id"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="verticalImage"    column="vertical_image"    />
+        <result property="maskEffect"    column="mask_effect"    />
+        <result property="maskImage"    column="mask_image"    />
+        <result property="sortOrder"    column="sort_order"    />
+        <result property="status"    column="status"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="updatedBy"    column="updated_by"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="deletedAt"    column="deleted_at"    />
+        <result property="deletedBy"    column="deleted_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFeaturedProjectVo">
+        select id, project_id, vertical_image, mask_effect, mask_image, sort_order, status, created_at, updated_at, created_by, updated_by, del_flag, deleted_at, deleted_by, remark from featured_project
+    </sql>
+
+    <select id="selectFeaturedProjectList" parameterType="FeaturedProject" resultMap="FeaturedProjectResult">
+        <include refid="selectFeaturedProjectVo"/>
+        <where>  
+            <if test="projectId != null "> and project_id = #{projectId}</if>
+            <if test="sortOrder != null "> and sort_order = #{sortOrder}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFeaturedProjectById" parameterType="Long" resultMap="FeaturedProjectResult">
+        <include refid="selectFeaturedProjectVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFeaturedProject" parameterType="FeaturedProject" useGeneratedKeys="true" keyProperty="id">
+        insert into featured_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">project_id,</if>
+            <if test="verticalImage != null">vertical_image,</if>
+            <if test="maskEffect != null">mask_effect,</if>
+            <if test="maskImage != null">mask_image,</if>
+            <if test="sortOrder != null">sort_order,</if>
+            <if test="status != null">status,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="updatedBy != null">updated_by,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="deletedAt != null">deleted_at,</if>
+            <if test="deletedBy != null">deleted_by,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">#{projectId},</if>
+            <if test="verticalImage != null">#{verticalImage},</if>
+            <if test="maskEffect != null">#{maskEffect},</if>
+            <if test="maskImage != null">#{maskImage},</if>
+            <if test="sortOrder != null">#{sortOrder},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="updatedBy != null">#{updatedBy},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="deletedAt != null">#{deletedAt},</if>
+            <if test="deletedBy != null">#{deletedBy},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFeaturedProject" parameterType="FeaturedProject">
+        update featured_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="verticalImage != null">vertical_image = #{verticalImage},</if>
+            <if test="maskEffect != null">mask_effect = #{maskEffect},</if>
+            <if test="maskImage != null">mask_image = #{maskImage},</if>
+            <if test="sortOrder != null">sort_order = #{sortOrder},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="updatedBy != null">updated_by = #{updatedBy},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="deletedAt != null">deleted_at = #{deletedAt},</if>
+            <if test="deletedBy != null">deleted_by = #{deletedBy},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFeaturedProjectById" parameterType="Long">
+        delete from featured_project where id = #{id}
+    </delete>
+
+    <delete id="deleteFeaturedProjectByIds" parameterType="String">
+        delete from featured_project where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
