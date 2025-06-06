@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feiyi.catalog.mapper.HeritageProjectMapper">
+    
+    <resultMap type="HeritageProject" id="HeritageProjectResult">
+        <result property="id"    column="id"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="heritageCategoryName"    column="heritage_category_name"    />
+        <result property="serialNumber"    column="serial_number"    />
+        <result property="declarationArea"    column="declaration_area"    />
+        <result property="declarationLevel"    column="declaration_level"    />
+        <result property="projectLevel"    column="project_level"    />
+        <result property="parentProjectId"    column="parent_project_id"    />
+        <result property="hasSubProjects"    column="has_sub_projects"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="unescoId"    column="unesco_id"    />
+        <result property="coverImage"    column="cover_image"    />
+        <result property="milestoneEvents"    column="milestone_events"    />
+        <result property="projectDescription"    column="project_description"    />
+        <result property="projectType"    column="project_type"    />
+        <result property="protectionUnit"    column="protection_unit"    />
+        <result property="publishTime"    column="publish_time"    />
+        <result property="articleSource"    column="article_source"    />
+        <result property="viewCount"    column="view_count"    />
+        <result property="status"    column="status"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="updatedBy"    column="updated_by"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="deletedAt"    column="deleted_at"    />
+        <result property="deletedBy"    column="deleted_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectHeritageProjectVo">
+        select id, project_name, heritage_category_name, serial_number, declaration_area, declaration_level, project_level, parent_project_id, has_sub_projects, batch_number, unesco_id, cover_image, milestone_events, project_description, project_type, protection_unit, publish_time, article_source, view_count, status, created_at, updated_at, created_by, updated_by, del_flag, deleted_at, deleted_by, remark from heritage_project
+    </sql>
+
+    <select id="selectHeritageProjectList" parameterType="HeritageProject" resultMap="HeritageProjectResult">
+        <include refid="selectHeritageProjectVo"/>
+        <where>  
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="heritageCategoryName != null  and heritageCategoryName != ''"> and heritage_category_name like concat('%', #{heritageCategoryName}, '%')</if>
+            <if test="serialNumber != null  and serialNumber != ''"> and serial_number = #{serialNumber}</if>
+            <if test="declarationArea != null  and declarationArea != ''"> and declaration_area = #{declarationArea}</if>
+            <if test="parentProjectId != null "> and parent_project_id = #{parentProjectId}</if>
+            <if test="hasSubProjects != null "> and has_sub_projects = #{hasSubProjects}</if>
+            <if test="batchNumber != null "> and batch_number = #{batchNumber}</if>
+            <if test="unescoId != null "> and unesco_id = #{unescoId}</if>
+            <if test="projectDescription != null  and projectDescription != ''"> and project_description like concat('%', #{projectDescription}, '%')</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="protectionUnit != null  and protectionUnit != ''"> and protection_unit = #{protectionUnit}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectHeritageProjectById" parameterType="Long" resultMap="HeritageProjectResult">
+        <include refid="selectHeritageProjectVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertHeritageProject" parameterType="HeritageProject" useGeneratedKeys="true" keyProperty="id">
+        insert into heritage_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectName != null and projectName != ''">project_name,</if>
+            <if test="heritageCategoryName != null">heritage_category_name,</if>
+            <if test="serialNumber != null">serial_number,</if>
+            <if test="declarationArea != null">declaration_area,</if>
+            <if test="declarationLevel != null">declaration_level,</if>
+            <if test="projectLevel != null">project_level,</if>
+            <if test="parentProjectId != null">parent_project_id,</if>
+            <if test="hasSubProjects != null">has_sub_projects,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="unescoId != null">unesco_id,</if>
+            <if test="coverImage != null">cover_image,</if>
+            <if test="milestoneEvents != null">milestone_events,</if>
+            <if test="projectDescription != null">project_description,</if>
+            <if test="projectType != null">project_type,</if>
+            <if test="protectionUnit != null">protection_unit,</if>
+            <if test="publishTime != null">publish_time,</if>
+            <if test="articleSource != null">article_source,</if>
+            <if test="viewCount != null">view_count,</if>
+            <if test="status != null">status,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="updatedBy != null">updated_by,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="deletedAt != null">deleted_at,</if>
+            <if test="deletedBy != null">deleted_by,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectName != null and projectName != ''">#{projectName},</if>
+            <if test="heritageCategoryName != null">#{heritageCategoryName},</if>
+            <if test="serialNumber != null">#{serialNumber},</if>
+            <if test="declarationArea != null">#{declarationArea},</if>
+            <if test="declarationLevel != null">#{declarationLevel},</if>
+            <if test="projectLevel != null">#{projectLevel},</if>
+            <if test="parentProjectId != null">#{parentProjectId},</if>
+            <if test="hasSubProjects != null">#{hasSubProjects},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="unescoId != null">#{unescoId},</if>
+            <if test="coverImage != null">#{coverImage},</if>
+            <if test="milestoneEvents != null">#{milestoneEvents},</if>
+            <if test="projectDescription != null">#{projectDescription},</if>
+            <if test="projectType != null">#{projectType},</if>
+            <if test="protectionUnit != null">#{protectionUnit},</if>
+            <if test="publishTime != null">#{publishTime},</if>
+            <if test="articleSource != null">#{articleSource},</if>
+            <if test="viewCount != null">#{viewCount},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="updatedBy != null">#{updatedBy},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="deletedAt != null">#{deletedAt},</if>
+            <if test="deletedBy != null">#{deletedBy},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHeritageProject" parameterType="HeritageProject">
+        update heritage_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectName != null and projectName != ''">project_name = #{projectName},</if>
+            <if test="heritageCategoryName != null">heritage_category_name = #{heritageCategoryName},</if>
+            <if test="serialNumber != null">serial_number = #{serialNumber},</if>
+            <if test="declarationArea != null">declaration_area = #{declarationArea},</if>
+            <if test="declarationLevel != null">declaration_level = #{declarationLevel},</if>
+            <if test="projectLevel != null">project_level = #{projectLevel},</if>
+            <if test="parentProjectId != null">parent_project_id = #{parentProjectId},</if>
+            <if test="hasSubProjects != null">has_sub_projects = #{hasSubProjects},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="unescoId != null">unesco_id = #{unescoId},</if>
+            <if test="coverImage != null">cover_image = #{coverImage},</if>
+            <if test="milestoneEvents != null">milestone_events = #{milestoneEvents},</if>
+            <if test="projectDescription != null">project_description = #{projectDescription},</if>
+            <if test="projectType != null">project_type = #{projectType},</if>
+            <if test="protectionUnit != null">protection_unit = #{protectionUnit},</if>
+            <if test="publishTime != null">publish_time = #{publishTime},</if>
+            <if test="articleSource != null">article_source = #{articleSource},</if>
+            <if test="viewCount != null">view_count = #{viewCount},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="updatedBy != null">updated_by = #{updatedBy},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="deletedAt != null">deleted_at = #{deletedAt},</if>
+            <if test="deletedBy != null">deleted_by = #{deletedBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHeritageProjectById" parameterType="Long">
+        delete from heritage_project where id = #{id}
+    </delete>
+
+    <delete id="deleteHeritageProjectByIds" parameterType="String">
+        delete from heritage_project where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
