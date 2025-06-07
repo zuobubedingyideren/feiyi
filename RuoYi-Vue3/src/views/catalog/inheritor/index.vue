@@ -33,7 +33,7 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="传承人级别" prop="inheritorLevel">
+      <el-form-item label="级别" prop="inheritorLevel" style="font-size: 12px;">
         <el-input
           v-model="queryParams.inheritorLevel"
           placeholder="请输入传承人级别"
@@ -149,7 +149,7 @@
         <el-form-item label="传承人头像" prop="avatarUrl">
           <el-input v-model="form.avatarUrl" type="textarea" placeholder="请输入内容" />
         </el-form-item>
-        <el-form-item label="传承人级别" prop="inheritorLevel">
+        <el-form-item label="传承人级别" prop="inheritorLevel" style="font-size: 12px">
           <el-input v-model="form.inheritorLevel" placeholder="请输入传承人级别" />
         </el-form-item>
         <el-form-item label="传承人详细信息描述" prop="inheritorInfo">

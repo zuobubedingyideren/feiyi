@@ -342,6 +342,12 @@ function handleUpdate(row) {
 /** 提交按钮 */
 function submitForm() {
   proxy.$refs["articleRef"].validate(valid => {
+    if (form.value.content) {
+  // 先移除p标签
+  form.value.content = form.value.content.replace(/<\/?p>/g, '');
+  // 再移除br标签
+  form.value.content = form.value.content.replace(/<br\s*\/?>/gi, '');
+}
     if (valid) {
       if (form.value.id != null) {
         updateArticle(form.value).then(response => {

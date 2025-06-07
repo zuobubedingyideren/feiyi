@@ -57,7 +57,7 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="联合国教科文组织名录ID" prop="unescoId">
+      <el-form-item label="联合国教科文组织名录ID" prop="unescoId" style="white-space: nowrap; margin-left: 25px;font-size:12px;">
         <el-input
           v-model="queryParams.unescoId"
           placeholder="请输入联合国教科文组织名录ID"
