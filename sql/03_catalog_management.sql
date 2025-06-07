@@ -47,7 +47,6 @@ CREATE TABLE heritage_project (
     
     -- 状态信息
     status TINYINT DEFAULT 1 COMMENT '状态：1-显示，0-隐藏',
-    is_featured TINYINT DEFAULT 0 COMMENT '是否推荐：1-推荐，0-不推荐',
     
     -- 审计字段
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
@@ -76,7 +75,6 @@ CREATE TABLE heritage_project (
     INDEX idx_publish_time (publish_time) COMMENT '发布时间索引',
     INDEX idx_view_count (view_count) COMMENT '浏览量索引',
     INDEX idx_status (status) COMMENT '状态索引',
-    INDEX idx_is_featured (is_featured) COMMENT '推荐状态索引',
     INDEX idx_del_flag (del_flag) COMMENT '删除状态索引',
     
     -- 外键约束（自引用）
@@ -95,10 +93,7 @@ CREATE TABLE unesco_heritage (
     unesco_category VARCHAR(100) NOT NULL COMMENT '联合国教科文组织类别',
     unesco_list_type TINYINT COMMENT 'UNESCO名录类型：1-人类非物质文化遗产代表作名录，2-急需保护的非物质文化遗产名录，3-非物质文化遗产优秀实践名册',
     unesco_year INT NOT NULL COMMENT '入选联合国教科文组织年份',
-    unesco_batch VARCHAR(50) COMMENT '入选批次',
-    unesco_number VARCHAR(50) COMMENT '编号',
     unesco_description TEXT COMMENT '名录描述',
-    has_sub_projects TINYINT DEFAULT 0 COMMENT '是否有子项目：0-否，1-是',
 
     -- 发布信息
     publish_time DATETIME COMMENT '发布时间',
@@ -127,7 +122,6 @@ CREATE TABLE unesco_heritage (
     INDEX idx_unesco_category (unesco_category) COMMENT 'UNESCO类别索引',
     INDEX idx_unesco_list_type (unesco_list_type) COMMENT 'UNESCO名录类型索引',
     INDEX idx_unesco_year (unesco_year) COMMENT '入选年份索引',
-    INDEX idx_has_sub_projects (has_sub_projects) COMMENT '是否有子项目索引',
     INDEX idx_status (status) COMMENT '状态索引',
     INDEX idx_del_flag (del_flag) COMMENT '删除状态索引'
 ) COMMENT 'UNESCO非遗名录表，管理联合国教科文组织非遗名录信息';
